@@ -1,0 +1,33 @@
+version: "3"
+services:
+  go:
+    build:
+      context: .
+      dockerfile: ./infra/go/Dockerfile
+    volumes:
+      - type: bind
+        source: ./go
+        target: /app
+    ports:
+      - "8080:8080"
+
+  node:
+    build:
+      context: .
+      dockerfile: ./infra/node/Dockerfile
+    volumes:
+      - type: bind
+        source: ./node
+        target: /app
+      - type: volume
+        source: node-module-volume
+        target: /app/node_modules
+    env_file:
+      - ./node/.env
+    ports:
+      - "4173:4173"
+      - "5173:5173"
+
+volumes:
+  node-module-volume:
+    driver: local
