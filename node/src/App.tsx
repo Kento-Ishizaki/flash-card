@@ -15,7 +15,10 @@ export function App() {
   }, []);
 
   const fetchWords = async () => {
-    const res = await fetch("http://localhost:8080/words");
+    const res =
+      process.env.NODE_ENV === "development"
+        ? await fetch("http://localhost:8080/words")
+        : await fetch("output.json");
     const data = await res.json();
     console.log(data);
     setWords(data);
