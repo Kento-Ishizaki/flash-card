@@ -28,19 +28,33 @@ export function App() {
     setCurrWordIndex(currWordIndex + 1);
   };
 
+  const handleReset = () => {
+    setCurrWordIndex(0);
+  };
+
   return (
-    <div className="h-screen w-screen bg-gray-200 flex justify-center items-center ">
-      {words.length > 0 && (
-        <div
-          className="h-36 w-full bg-gray-100 max-w-sm rounded-lg shadow-lg flex justify-center items-center cursor-pointer"
-          onClick={handleCardClick}
-        >
-          <div className="">
-            <p>英語: {words[currWordIndex].english}</p>
-            <p>日本語: {words[currWordIndex].japanese}</p>
+    <div className="h-screen w-screen bg-gray-200">
+      <div className="flex flex-col justify-center items-center h-screen">
+        {words.length > 0 && currWordIndex < words.length && (
+          <div>
+            <div
+              className="flex flex-col justify-center items-center py-10 px-20 bg-gray-100 max-w-sm rounded-lg shadow-lg cursor-pointer text-xl"
+              onClick={handleCardClick}
+            >
+              <p>英語: {words[currWordIndex].english}</p>
+              <p>日本語: {words[currWordIndex].japanese}</p>
+            </div>
+          </div>
+        )}
+        <div className="block justify-center items-center">
+          <div
+            className="flex items-center justify-center bg-gray-100 rounded-lg shadow-lg cursor-pointer mt-10 px-10 py-5"
+            onClick={handleReset}
+          >
+            <p>リセット</p>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
